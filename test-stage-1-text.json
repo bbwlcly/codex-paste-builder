@@ -1,0 +1,34 @@
+{
+  "name": "Stage 1 Text Test",
+  "width": 393,
+  "height": 240,
+  "background": "#FFFFFF",
+  "layout": "column",
+  "padding": 24,
+  "gap": 12,
+  "children": [
+    {
+      "type": "text",
+      "name": "Explicit font text",
+      "text": "Explicit Inter Bold",
+      "width": 280,
+      "height": 32,
+      "fontFamily": "Inter",
+      "fontStyle": "Bold",
+      "fontSize": 22,
+      "lineHeight": 28,
+      "letterSpacing": 0,
+      "color": "#111827",
+      "textAlign": "LEFT",
+      "textAutoResize": "NONE"
+    },
+    {
+      "type": "text",
+      "name": "Weight fallback text",
+      "text": "Weight maps to Medium",
+      "fontSize": 16,
+      "weight": "medium",
+      "color": "#4B5563"
+    }
+  ]
+}
