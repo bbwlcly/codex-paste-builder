@@ -1,0 +1,51 @@
+{
+  "name": "Stage 2 Layout Test",
+  "width": 393,
+  "height": 320,
+  "background": "#F8FAFC",
+  "layout": "column",
+  "padding": {
+    "top": 20,
+    "right": 16,
+    "bottom": 20,
+    "left": 16
+  },
+  "gap": 16,
+  "children": [
+    {
+      "type": "card",
+      "name": "Independent radius card",
+      "width": 361,
+      "height": 120,
+      "fill": "#FFFFFF",
+      "radius": {
+        "topLeft": 20,
+        "topRight": 20,
+        "bottomRight": 4,
+        "bottomLeft": 4
+      },
+      "layout": "row",
+      "paddingHorizontal": 16,
+      "paddingVertical": 12,
+      "gap": 12,
+      "alignMain": "SPACE_BETWEEN",
+      "alignCross": "CENTER",
+      "clipContent": true,
+      "children": [
+        {
+          "type": "text",
+          "text": "Left",
+          "fontSize": 16,
+          "weight": "bold",
+          "color": "#111827"
+        },
+        {
+          "type": "text",
+          "text": "Right",
+          "fontSize": 14,
+          "color": "#6B7280"
+        }
+      ]
+    }
+  ]
+}
