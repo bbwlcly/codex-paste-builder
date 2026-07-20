@@ -1,0 +1,43 @@
+{
+  "name": "Stage 3 Shadow Absolute Test",
+  "width": 393,
+  "height": 360,
+  "background": "#F8FAFC",
+  "children": [
+    {
+      "type": "frame",
+      "name": "Layered container",
+      "x": 16,
+      "y": 16,
+      "width": 361,
+      "height": 260,
+      "fill": "#E5E7EB",
+      "radius": 24,
+      "clipContent": true,
+      "children": [
+        {
+          "type": "card",
+          "name": "Floating card",
+          "position": "absolute",
+          "x": 18,
+          "y": 170,
+          "width": 325,
+          "height": 72,
+          "fill": "#FFFFFF",
+          "radius": 16,
+          "shadow": {
+            "x": 0,
+            "y": 8,
+            "blur": 24,
+            "spread": 0,
+            "color": "#0000001A"
+          },
+          "constraints": {
+            "horizontal": "STRETCH",
+            "vertical": "MAX"
+          }
+        }
+      ]
+    }
+  ]
+}
