@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      body {
+        margin: 0;
+        background: var(--figma-color-bg);
+        color: var(--figma-color-text);
+      }
+
+      .shell {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        padding: 16px;
+      }
+
+      h1 {
+        margin: 0 0 6px;
+        font-size: 16px;
+        font-weight: 650;
+      }
+
+      p {
+        margin: 0 0 12px;
+        color: var(--figma-color-text-secondary);
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      textarea {
+        box-sizing: border-box;
+        flex: 1;
+        min-height: 280px;
+        width: 100%;
+        resize: none;
+        border: 1px solid var(--figma-color-border);
+        border-radius: 8px;
+        padding: 12px;
+        background: var(--figma-color-bg-secondary);
+        color: var(--figma-color-text);
+        font: 12px/1.45 "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      button {
+        border: 1px solid var(--figma-color-border);
+        border-radius: 6px;
+        padding: 9px 12px;
+        background: var(--figma-color-bg);
+        color: var(--figma-color-text);
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      button.primary {
+        border-color: var(--figma-color-bg-brand);
+        background: var(--figma-color-bg-brand);
+        color: var(--figma-color-text-onbrand);
+      }
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 10px;
+        color: var(--figma-color-text-secondary);
+        font-size: 12px;
+      }
+
+      #status {
+        min-height: 18px;
+        margin-top: 10px;
+        font-size: 12px;
+        color: var(--figma-color-text-secondary);
+      }
+
+      #report {
+        box-sizing: border-box;
+        max-height: 128px;
+        overflow: auto;
+        margin-top: 8px;
+        border: 1px solid var(--figma-color-border);
+        border-radius: 8px;
+        padding: 10px;
+        background: var(--figma-color-bg-secondary);
+        font-size: 12px;
+        line-height: 1.45;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <h1>Codex Paste Builder</h1>
+      <p>Import JSON from Codex, or export selected Figma layers as JSON for Codex review.</p>
+      <textarea id="payload" spellcheck="false"></textarea>
+      <label><input id="includeImageData" type="checkbox" /> Include image data when exporting</label>
+      <div class="actions">
+        <button class="primary" id="import">Create in Figma</button>
+        <button id="export">Export selection</button>
+        <button id="copy">Copy JSON</button>
+        <button id="sample">Load sample</button>
+        <button id="cancel">Close</button>
+      </div>
+      <div id="status"></div>
+      <div id="report">No import or export report yet.</div>
+    </div>
+
+    <script>
+      const sample = {
+        name: "Mobile Profile Draft",
+        width: 393,
+        height: 852,
+        background: "#F8FAFC",
+        layout: "column",
+        padding: { top: 16, right: 16, bottom: 24, left: 16 },
+        gap: 16,
+        children: [
+          {
+            type: "frame",
+            name: "Hero image area",
+            width: 361,
+            height: 260,
+            fill: "#E5E7EB",
+            radius: { topLeft: 24, topRight: 24, bottomRight: 24, bottomLeft: 24 },
+            clipContent: true,
+            shadow: { x: 0, y: 8, blur: 24, spread: 0, color: "#0000001A" },
+            children: [
+              {
+                type: "imagePlaceholder",
+                name: "Photographer work",
+                width: 361,
+                height: 260,
+                radius: 24,
+                label: "Photo"
+              },
+              {
+                type: "card",
+                name: "Floating profile card",
+                position: "absolute",
+                x: 16,
+                y: 172,
+                width: 329,
+                height: 72,
+                fill: "#FFFFFF",
+                radius: 16,
+                shadow: { x: 0, y: 6, blur: 18, spread: 0, color: "#00000014" },
+                layout: "row",
+                padding: { top: 12, right: 14, bottom: 12, left: 14 },
+                gap: 12,
+                alignCross: "CENTER",
+                children: [
+                  {
+                    type: "text",
+                    name: "Name",
+                    text: "Studio name",
+                    fontFamily: "Inter",
+                    fontStyle: "Bold",
+                    fontSize: 18,
+                    lineHeight: 24,
+                    letterSpacing: 0,
+                    color: "#111827",
+                    textAlign: "LEFT",
+                    textAutoResize: "WIDTH_AND_HEIGHT"
+                  },
+                  {
+                    type: "text",
+                    name: "Meta",
+                    text: "Portrait photographer",
+                    fontFamily: "Inter",
+                    fontStyle: "Regular",
+                    fontSize: 13,
+                    lineHeight: 18,
+                    color: "#6B7280",
+                    textAutoResize: "WIDTH_AND_HEIGHT"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            type: "button",
+            name: "Booking button",
+            text: "Book now",
+            width: 361,
+            height: 52,
+            fill: "#F45D22",
+            color: "#FFFFFF",
+            radius: 26,
+            fontFamily: "Inter",
+            fontStyle: "Bold",
+            fontSize: 16,
+            shadow: { x: 0, y: 4, blur: 12, spread: 0, color: "#F45D2233" },
+            alignMain: "CENTER",
+            alignCross: "CENTER"
+          }
+        ]
+      };
+
+      const payload = document.getElementById("payload");
+      const status = document.getElementById("status");
+      const report = document.getElementById("report");
+      const includeImageData = document.getElementById("includeImageData");
+      payload.value = JSON.stringify(sample, null, 2);
+
+      function renderReport(data) {
+        if (!data) {
+          report.textContent = "No report returned.";
+          return;
+        }
+        const lines = [
+          "Created nodes: " + (data.created || 0),
+          "Warnings: " + (data.warnings ? data.warnings.length : 0),
+          "Errors: " + (data.errors ? data.errors.length : 0)
+        ];
+        if (data.warnings && data.warnings.length) {
+          lines.push("", "Warnings:");
+          data.warnings.forEach((item) => lines.push("- " + item));
+        }
+        if (data.errors && data.errors.length) {
+          lines.push("", "Errors:");
+          data.errors.forEach((item) => lines.push("- " + item));
+        }
+        report.textContent = lines.join("\n");
+      }
+
+      document.getElementById("sample").onclick = () => {
+        payload.value = JSON.stringify(sample, null, 2);
+        status.textContent = "Sample loaded.";
+      };
+
+      document.getElementById("import").onclick = () => {
+        status.textContent = "Creating layers...";
+        parent.postMessage({ pluginMessage: { type: "import-design", payload: payload.value } }, "*");
+      };
+
+      document.getElementById("export").onclick = () => {
+        status.textContent = "Exporting selected layers...";
+        parent.postMessage({
+          pluginMessage: {
+            type: "export-selection",
+            includeImageData: includeImageData.checked
+          }
+        }, "*");
+      };
+
+      document.getElementById("copy").onclick = async () => {
+        try {
+          await navigator.clipboard.writeText(payload.value);
+          status.textContent = "JSON copied.";
+        } catch (error) {
+          payload.select();
+          document.execCommand("copy");
+          status.textContent = "JSON copied.";
+        }
+      };
+
+      document.getElementById("cancel").onclick = () => {
+        parent.postMessage({ pluginMessage: { type: "cancel" } }, "*");
+      };
+
+      onmessage = (event) => {
+        const message = event.data.pluginMessage;
+        if (!message) return;
+        if (message.type === "exported") {
+          payload.value = message.payload;
+        }
+        status.textContent = message.message;
+        renderReport(message.report);
+      };
+    </script>
+  </body>
+</html>
