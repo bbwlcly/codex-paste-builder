@@ -1,0 +1,11 @@
+{
+  "name": "Codex Paste Builder",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "networkAccess": {
+    "allowedDomains": ["*"],
+    "reasoning": "The plugin imports image nodes from user-provided JSON. Remote image URLs can come from different domains during design review and prototyping."
+  }
+}
