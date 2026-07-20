@@ -1,0 +1,122 @@
+{
+  "name": "Mobile Profile Draft",
+  "width": 393,
+  "height": 852,
+  "background": "#F8FAFC",
+  "layout": "column",
+  "padding": {
+    "top": 16,
+    "right": 16,
+    "bottom": 24,
+    "left": 16
+  },
+  "gap": 16,
+  "children": [
+    {
+      "type": "frame",
+      "name": "Hero image area",
+      "width": 361,
+      "height": 260,
+      "fill": "#E5E7EB",
+      "radius": {
+        "topLeft": 24,
+        "topRight": 24,
+        "bottomRight": 24,
+        "bottomLeft": 24
+      },
+      "clipContent": true,
+      "shadow": {
+        "x": 0,
+        "y": 8,
+        "blur": 24,
+        "spread": 0,
+        "color": "#0000001A"
+      },
+      "children": [
+        {
+          "type": "imagePlaceholder",
+          "name": "Photographer work",
+          "width": 361,
+          "height": 260,
+          "radius": 24,
+          "label": "Photo"
+        },
+        {
+          "type": "card",
+          "name": "Floating profile card",
+          "position": "absolute",
+          "x": 16,
+          "y": 172,
+          "width": 329,
+          "height": 72,
+          "fill": "#FFFFFF",
+          "radius": 16,
+          "shadow": {
+            "x": 0,
+            "y": 6,
+            "blur": 18,
+            "spread": 0,
+            "color": "#00000014"
+          },
+          "layout": "row",
+          "padding": {
+            "top": 12,
+            "right": 14,
+            "bottom": 12,
+            "left": 14
+          },
+          "gap": 12,
+          "alignCross": "CENTER",
+          "children": [
+            {
+              "type": "text",
+              "name": "Name",
+              "text": "Studio name",
+              "fontFamily": "Inter",
+              "fontStyle": "Bold",
+              "fontSize": 18,
+              "lineHeight": 24,
+              "letterSpacing": 0,
+              "color": "#111827",
+              "textAlign": "LEFT",
+              "textAutoResize": "WIDTH_AND_HEIGHT"
+            },
+            {
+              "type": "text",
+              "name": "Meta",
+              "text": "Portrait photographer",
+              "fontFamily": "Inter",
+              "fontStyle": "Regular",
+              "fontSize": 13,
+              "lineHeight": 18,
+              "color": "#6B7280",
+              "textAutoResize": "WIDTH_AND_HEIGHT"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Booking button",
+      "text": "Book now",
+      "width": 361,
+      "height": 52,
+      "fill": "#F45D22",
+      "color": "#FFFFFF",
+      "radius": 26,
+      "fontFamily": "Inter",
+      "fontStyle": "Bold",
+      "fontSize": 16,
+      "shadow": {
+        "x": 0,
+        "y": 4,
+        "blur": 12,
+        "spread": 0,
+        "color": "#F45D2233"
+      },
+      "alignMain": "CENTER",
+      "alignCross": "CENTER"
+    }
+  ]
+}
